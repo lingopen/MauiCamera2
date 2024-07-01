@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<pages:BasePage
+    x:Class="MauiCamera2.Pages.Camera2Page"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:control="clr-namespace:MauiCamera2.Controls"
+    xmlns:pages="clr-namespace:MauiCamera2.Pages"
+    x:Name="root"
+    x:DataType="pages:Camera2PageModel"
+    x:TypeArguments="pages:Camera2PageModel"
+    Style="{StaticResource ContentPageStyle}">
+    <Grid>
+        <Grid RowDefinitions="auto,*,auto">
+            <!--  标题  -->
+            <Grid
+                ColumnDefinitions="auto,*,auto"
+                RowDefinitions="auto,*,auto"
+                VerticalOptions="Center">
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Offset="0.5" Color="{StaticResource PrimaryDark}" />
+                        <GradientStop Offset="1" Color="{StaticResource Primary}" />
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <HorizontalStackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                    <HorizontalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BackCommand}" NumberOfTapsRequired="1" />
+                    </HorizontalStackLayout.GestureRecognizers>
+                    <Label
+                        Margin="10,10,0,10"
+                        FontFamily="IconFont"
+                        FontSize="18"
+                        Text="&#xe71f;"
+                        TextColor="{StaticResource Gray100}"
+                        VerticalOptions="Center" />
+                </HorizontalStackLayout>
+                <Label
+                    Grid.Column="1"
+                    Margin="-15,0,0,0"
+                    FontSize="18"
+                    HorizontalOptions="Center"
+                    Text="{DynamicResource 相机拍照}"
+                    TextColor="{StaticResource Gray100}"
+                    VerticalOptions="Center" />
+            </Grid>
+            <!--  内容  -->
+            <Grid
+                Grid.Row="1"
+                Margin="4"
+                RowDefinitions="*,auto,auto">
+                <control:TextureView x:Name="textureView" />
+                <Button Grid.Row="1" Command="{Binding ChangeCameraCommand}" FontFamily="IconFont" Text="&#xe6f9;" />
+                <Button Grid.Row="2" Command="{Binding TakePictureCommand}" FontFamily="IconFont"  Text="&#xe664;" />
+            </Grid>
+        </Grid>
+        <!--  loading提示  -->
+        <Frame
+            Grid.Row="2"
+            Margin="2,2"
+            BackgroundColor="{StaticResource Gray600}"
+            CornerRadius="10"
+            HasShadow="True"
+            HeightRequest="80"
+            HorizontalOptions="Fill"
+            IsVisible="{Binding IsWaitting}"
+            Opacity="0.8"
+            VerticalOptions="CenterAndExpand">
+            <StackLayout>
+                <ActivityIndicator
+                    HorizontalOptions="CenterAndExpand"
+                    IsRunning="{Binding IsWaitting}"
+                    VerticalOptions="CenterAndExpand"
+                    Color="{DynamicResource Gray-White}" />
+                <Label
+                    Grid.Row="1"
+                    FontSize="14"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="{Binding WaittingText, TargetNullValue='正在识别请稍后...'}"
+                    TextColor="White"
+                    VerticalOptions="CenterAndExpand" />
+            </StackLayout>
+        </Frame>
+    </Grid>
+</pages:BasePage>

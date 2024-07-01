@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<pages:BasePage
+    x:Class="MauiCamera2.Pages.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:cvt="clr-namespace:MauiCamera2.Converters"
+    xmlns:pages="clr-namespace:MauiCamera2.Pages"
+    xmlns:vm="clr-namespace:MauiCamera2.Pages"
+    Title="MainPage"
+    x:DataType="vm:MainPageModel"
+    x:TypeArguments="vm:MainPageModel"
+    Style="{StaticResource ContentPageStyle}">
+    <pages:BasePage.Resources>
+        <cvt:ImageUriConverter x:Key="cvtImg" />
+        <cvt:BoolHasValueConvertor x:Key="cvtBool" />
+        <cvt:BoolReversalConverter x:Key="cvtReversal" />
+    </pages:BasePage.Resources>
+    <pages:BasePage.Content>
+        <ScrollView>
+            <Grid>
+                <Grid.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Offset="0.5" Color="{StaticResource PrimaryDark}" />
+                        <GradientStop Offset="1" Color="{StaticResource Primary}" />
+                    </LinearGradientBrush>
+                </Grid.Background>
+                <Grid ColumnDefinitions="*" RowDefinitions="40,*,auto">
+                    <Label
+                        Margin="10"
+                        FontSize="18"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="{DynamicResource 示例程序}"
+                        TextColor="AliceBlue"
+                        VerticalOptions="Center" />
+                    <Border
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        BackgroundColor="White"
+                        StrokeShape="RoundRectangle 10,10,10,10"
+                        StrokeThickness="0">
+
+                        <VerticalStackLayout>
+                            <StackLayout
+                                Margin="15,5,15,0"
+                                Orientation="Horizontal"
+                                VerticalOptions="CenterAndExpand">
+                                <Border
+                                    HeightRequest="60"
+                                    StrokeShape="RoundRectangle 50"
+                                    WidthRequest="60">
+
+                                    <Image
+                                        Aspect="AspectFill"
+                                        BackgroundColor="{StaticResource Gray200}"
+                                        HeightRequest="60"
+                                        Source="{Binding LoginInfo.Avatar, Converter={StaticResource cvtImg}}"
+                                        WidthRequest="60" />
+
+                                </Border>
+                                <StackLayout
+                                    Margin="20,10"
+                                    HorizontalOptions="FillAndExpand"
+                                    Orientation="Vertical">
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label FontSize="15">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span FontFamily="IconFont" Text="&#xe7e2; " />
+                                                    <Span Text="{Binding LoginInfo.Account}" />
+                                                    <Span Text="/" />
+                                                    <Span Text="{Binding LoginInfo.RealName}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </StackLayout>
+
+                                    <!--<Label
+                                    Margin="0,5,0,0"
+                                    FontAttributes="None"
+                                    FontSize="15"
+                                    TextColor="Gray">
+                                    <Label.FormattedText>
+                                    <FormattedString>
+                                    <Span FontFamily="IconFont" Text="{DynamicResource 机构}" />
+                                    <Span Text="{Binding LoginInfo.OrgName}" />
+                                    </FormattedString>
+                                    </Label.FormattedText>
+                                    </Label>-->
+                                    <Label
+                                        Margin="0,5,0,0"
+                                        FontAttributes="None"
+                                        FontSize="15"
+                                        TextColor="Gray">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span FontFamily="IconFont" Text="{DynamicResource 电话}" />
+                                                <Span Text="{Binding LoginInfo.Phone}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label
+                                        Margin="0,5,0,0"
+                                        FontAttributes="None"
+                                        FontSize="15"
+                                        TextColor="Gray">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span FontFamily="IconFont" Text="{DynamicResource 邮箱}" />
+
+                                                <Span Text="{Binding LoginInfo.Email}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+
+                                    <Label
+                                        Margin="0,5,0,0"
+                                        FontFamily="IconFont"
+                                        HorizontalOptions="Start"
+                                        IsVisible="{Binding IsOnLine}"
+                                        Text="{DynamicResource 在线作业}"
+                                        TextColor="{StaticResource Green300Accent}" />
+                                    <Label
+                                        Margin="0,5,0,0"
+                                        FontFamily="IconFont"
+                                        HorizontalOptions="Start"
+                                        IsVisible="{Binding IsOnLine, Converter={StaticResource cvtReversal}}"
+                                        Text="{DynamicResource 离线作业}"
+                                        TextColor="{StaticResource Red300Accent}" />
+                                </StackLayout>
+
+                            </StackLayout>
+                            <StackLayout
+                                Margin="0,5,0,10"
+                                Orientation="Horizontal"
+                                VerticalOptions="CenterAndExpand">
+                                <Line
+                                    Margin="0,10,0,0"
+                                    Stroke="Gray"
+                                    X1="0"
+                                    X2="280"
+                                    Y1="0"
+                                    Y2="0" />
+                                <Picker
+                                    Grid.Column="2"
+                                    Margin="5,-15"
+                                    FontSize="12"
+                                    ItemDisplayBinding="{Binding Name}"
+                                    ItemsSource="{Binding Langs}"
+                                    SelectedIndexChanged="Picker_SelectedIndexChanged"
+                                    SelectedItem="{Binding CurrentLang}" />
+                                <Line
+                                    Margin="0,10,0,0"
+                                    HorizontalOptions="End"
+                                    Stroke="Gray"
+                                    X1="0"
+                                    X2="40"
+                                    Y1="0"
+                                    Y2="0" />
+                            </StackLayout>
+
+                            <FlexLayout
+                                Margin="8"
+                                AlignItems="Center"
+                                JustifyContent="Start"
+                                Wrap="Wrap">
+                                <HorizontalStackLayout Margin="8,0" WidthRequest="80">
+                                    <VerticalStackLayout>
+
+                                        <Button
+                                            Command="{Binding OpenCamera2Command}"
+                                            FontSize="32"
+                                            Style="{StaticResource HomeButton}"
+                                            Text="&#xe665;" />
+                                        <Label
+                                            Margin="0,10,0,10"
+                                            FontSize="14"
+                                            HorizontalOptions="CenterAndExpand"
+                                            Text="{DynamicResource 相机拍照}" />
+
+                                    </VerticalStackLayout>
+                                    <!--  角标  -->
+                                    <!--<Frame
+                                    Margin="-35,0,0,0"
+                                    Padding="3"
+                                    BackgroundColor="{StaticResource Gray600}"
+                                    CornerRadius="10"
+                                    HorizontalOptions="End"
+                                    IsVisible="{Binding EquiCount, Converter={StaticResource cvtBool}}"
+                                    VerticalOptions="Start">
+                                    <Label
+                                    FontSize="12"
+                                    HorizontalOptions="Center"
+                                    Text="{Binding EquiCount}"
+                                    TextColor="White"
+                                    VerticalOptions="Center" />
+                                    </Frame>-->
+                                </HorizontalStackLayout>
+
+                                <HorizontalStackLayout Margin="8,0" WidthRequest="80">
+                                    <VerticalStackLayout>
+
+                                        <Button
+                                            Command="{Binding OpenFaceDetectorCommand}"
+                                            FontSize="32"
+                                            Style="{StaticResource HomeButton}"
+                                            Text="&#xe7f6;" />
+                                        <Label
+                                            Margin="0,10,0,10"
+                                            FontSize="14"
+                                            HorizontalOptions="CenterAndExpand"
+                                            Text="{DynamicResource 人脸检测}" />
+
+                                    </VerticalStackLayout>
+                                    <!--  角标  -->
+                                    <!--<Frame
+                                    Margin="-35,0,0,0"
+                                    Padding="3"
+                                    BackgroundColor="{StaticResource Gray600}"
+                                    CornerRadius="10"
+                                    HorizontalOptions="End"
+                                    IsVisible="{Binding EquiCount, Converter={StaticResource cvtBool}}"
+                                    VerticalOptions="Start">
+                                    <Label
+                                    FontSize="12"
+                                    HorizontalOptions="Center"
+                                    Text="{Binding EquiCount}"
+                                    TextColor="White"
+                                    VerticalOptions="Center" />
+                                    </Frame>-->
+                                </HorizontalStackLayout>
+                                <!--<HorizontalStackLayout Margin="8,0" WidthRequest="100">
+                                <VerticalStackLayout>
+                                <Button
+                                Command="{Binding ConsumCommand}"
+                                CommandParameter="ConsumeScanPage"
+                                FontSize="32"
+                                HeightRequest="80"
+                                Style="{StaticResource HomeButton}"
+                                Text="&#xe872;"
+                                WidthRequest="80" />
+                                <Label
+                                Margin="0,10,0,10"
+                                FontSize="14"
+                                HorizontalOptions="CenterAndExpand"
+                                Text="{DynamicResource XX任務}" />
+
+                                </VerticalStackLayout>
+                                <Frame
+                                Margin="-35,0,0,0"
+                                Padding="3"
+                                BackgroundColor="Red"
+                                CornerRadius="10"
+                                HorizontalOptions="End"
+                                IsVisible="{Binding ConsumeCount, Converter={StaticResource cvtBool}}"
+                                VerticalOptions="Start">
+                                <Label
+                                FontSize="12"
+                                HorizontalOptions="Center"
+                                Text="{Binding ConsumeCount}"
+                                TextColor="White"
+                                VerticalOptions="Center" />
+                                </Frame>
+                                </HorizontalStackLayout>-->
+
+                                <HorizontalStackLayout Margin="8,0" WidthRequest="80">
+                                    <VerticalStackLayout>
+                                        <Button
+                                            CommandParameter="CheckPage"
+                                            FontSize="32"
+                                            Style="{StaticResource HomeButton}"
+                                            Text="&#xe842;" />
+                                        <Label
+                                            Margin="0,10,0,10"
+                                            FontSize="14"
+                                            HorizontalOptions="CenterAndExpand"
+                                            Text="{DynamicResource 数据同步}" />
+
+                                    </VerticalStackLayout>
+                                </HorizontalStackLayout>
+                            </FlexLayout>
+
+                        </VerticalStackLayout>
+
+                    </Border>
+
+                    <Label
+                        Grid.Row="2"
+                        Margin="0,8"
+                        FontFamily="IconFont"
+                        FontSize="12"
+                        HorizontalOptions="Center"
+                        HorizontalTextAlignment="Center"
+                        Style="{StaticResource DescriptionLabelStyle}"
+                        Text="{Binding Version, StringFormat='Copyright © 2024 lingopen v{0} All rights reserved.'}"
+                        TextColor="{StaticResource Gray200}"
+                        VerticalOptions="Center"
+                        VerticalTextAlignment="Center" />
+                </Grid>
+                <Grid>
+                    <Frame
+                        BackgroundColor="{StaticResource Gray600}"
+                        CornerRadius="10"
+                        HasShadow="True"
+                        HorizontalOptions="Center"
+                        IsVisible="{Binding IsWaitting}"
+                        Opacity="0.8"
+                        VerticalOptions="Center">
+                        <StackLayout>
+                            <ActivityIndicator
+                                HorizontalOptions="Center"
+                                IsRunning="{Binding IsWaitting}"
+                                VerticalOptions="CenterAndExpand" />
+                            <!--<StackLayout
+                            HorizontalOptions="CenterAndExpand"
+                            IsVisible="{Binding IsShowProgress}"
+                            Orientation="Horizontal">
+                            <ProgressBar Progress="{Binding DownloadRate}" WidthRequest="220" />
+                            <Label
+                            Margin="5,0"
+                            HorizontalOptions="Start"
+                            Text="{Binding DownloadRate, StringFormat='{0:P1}'}"
+                            TextColor="{StaticResource Yellow100Accent}" />
+                            </StackLayout>-->
+                            <Label
+                                Margin="0,2"
+                                FontSize="14"
+                                HorizontalOptions="Center"
+                                Text="{Binding WaittingText, TargetNullValue='loading...'}"
+                                TextColor="{StaticResource Yellow100Accent}"
+                                VerticalOptions="FillAndExpand" />
+                        </StackLayout>
+                    </Frame>
+                </Grid>
+            </Grid>
+        </ScrollView>
+    </pages:BasePage.Content>
+</pages:BasePage>
