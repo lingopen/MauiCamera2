@@ -135,5 +135,23 @@ namespace MauiCamera2.Pages
                 IsWaitting = false;
             }
         }
+        [RelayCommand]
+        async Task OpenBLEPage()
+        {
+            try
+            {
+                IsWaitting = true;
+                await Shell.Current.GoToAsync($"///MainPage/BLEPage");
+            }
+            catch (Exception ex)
+            {
+                await Shell.Current.DisplayAlert("提示".Translate(), ex.Message, "确定".Translate(), "取消".Translate());
+                return;
+            }
+            finally
+            {
+                IsWaitting = false;
+            }
+        }
     }
 }

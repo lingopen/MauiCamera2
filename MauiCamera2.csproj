@@ -48,18 +48,25 @@
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.61" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+		<PackageReference Include="Plugin.BLE" Version="3.1.0" />
 		<PackageReference Include="PropertyChanged.Fody" Version="4.1.0" />
 		<PackageReference Include="SqlSugarCore" Version="5.1.4.160" />
 		<PackageReference Include="Yitter.IdGenerator" Version="1.0.14" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Pages\BLEPage.xaml.cs">
+	    <DependentUpon>BLEPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\Camera2FaceDetectorPage.xaml.cs">
 	    <DependentUpon>Camera2FaceDetectorPage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Pages\BLEPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Camera2FaceDetectorPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

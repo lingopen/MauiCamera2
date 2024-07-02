@@ -7,6 +7,9 @@
     <SelectedPlatformGroup>PhysicalDevice</SelectedPlatformGroup>
   </PropertyGroup>
   <ItemGroup>
+    <MauiXaml Update="Pages\BLEPage.xaml">
+      <SubType>Designer</SubType>
+    </MauiXaml>
     <MauiXaml Update="Pages\Camera2FaceDetectorPage.xaml">
       <SubType>Designer</SubType>
     </MauiXaml>

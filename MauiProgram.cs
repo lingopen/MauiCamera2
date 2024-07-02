@@ -5,6 +5,7 @@ using MauiCamera2.Platforms.Droid.Handlers;
 using MauiCamera2.Platforms.Droid.Services;
 using MauiCamera2.Services;
 using Microsoft.Extensions.Logging;
+using Plugin.BLE.Abstractions.Contracts;
 using SqlSugar;
 
 namespace MauiCamera2
@@ -49,8 +50,8 @@ namespace MauiCamera2
 #if ANDROID
             builder.Services.AddSingleton<IPlatformService, PlatformService>();
             builder.Services.AddSingleton<ISoundService, SoundService>();
-            builder.Services.AddTransient<ICamera2Service, Camera2Service>(); 
-            builder.Services.AddTransient<ICamera2FaceDetectorService, Camera2FaceDetectorService>();
+            builder.Services.AddTransient<ICamera2Service, Camera2Service>();
+            builder.Services.AddTransient<ICamera2FaceDetectorService, Camera2FaceDetectorService>(); 
 #endif
             builder.Services.AddTransient<MainPage>();
             builder.Services.AddTransient<MainPageModel>();
@@ -65,6 +66,9 @@ namespace MauiCamera2
             builder.Services.AddTransient<Camera2FaceDetectorPageModel>();
             Routing.RegisterRoute(nameof(Camera2FaceDetectorPage), typeof(Camera2FaceDetectorPage));
 
+            builder.Services.AddTransient<BLEPage>();
+            builder.Services.AddTransient<BLEPageModel>();
+            Routing.RegisterRoute(nameof(BLEPage), typeof(BLEPage));
             return builder.Build();
         }
     }
