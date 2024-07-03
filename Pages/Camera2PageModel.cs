@@ -16,23 +16,23 @@ namespace MauiCamera2.Pages
 
         private void _camera2Service_CallBack(object? sender, byte[]? dFile)
         {
-            string path = System.IO.Path.Combine(Constants.Plateform.GetRootPath(),"Image",$"{Yitter.IdGenerator.YitIdHelper.NextId()}.jpeg");
+            string path = System.IO.Path.Combine(Constants.Plateform.GetRootPath(), "Image", $"{Yitter.IdGenerator.YitIdHelper.NextId()}.jpeg");
             if (dFile != null)
             {
                 Constants.Plateform.SaveFile(dFile, path);
-            } 
+            }
         }
 
         public void TextureView_HandlerChanged(object? obj, EventArgs e)
         {
             if (obj is TextureView view && view != null && view.Handler?.PlatformView != null)
             {
-                _camera2Service.InitCamera(view.Handler?.PlatformView);
+                _camera2Service.CreateCamera(view.Handler?.PlatformView, null);
             }
         }
         public override Task OnDisappearing()
         {
-            _camera2Service.ReleaseCamera();
+            _camera2Service.CloseCamera();
             return base.OnDisappearing();
         }
         /// <summary>

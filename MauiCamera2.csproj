@@ -41,6 +41,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Controls\FaceView.cs" />
+	  <Compile Remove="Platforms\Android\Controls\FaceViewEx.cs" />
+	  <Compile Remove="Platforms\Android\Handlers\FaceViewHandler.cs" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="BouncyCastle.Cryptography" Version="2.4.0" />
 		<PackageReference Include="CommunityToolkit.Maui" Version="9.0.1" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />

@@ -29,8 +29,7 @@ namespace MauiCamera2
                  .ConfigureMauiHandlers(handlers =>
                  {
 #if ANDROID
-                     handlers.AddHandler(typeof(PdfWebView), typeof(PdfWebViewHandler));
-                     handlers.AddHandler(typeof(FaceView), typeof(FaceViewHandler));
+                     handlers.AddHandler(typeof(PdfWebView), typeof(PdfWebViewHandler)); 
                      handlers.AddHandler(typeof(TextureView), typeof(TextureViewHandler));
 #endif
                  })
@@ -51,7 +50,6 @@ namespace MauiCamera2
             builder.Services.AddSingleton<IPlatformService, PlatformService>();
             builder.Services.AddSingleton<ISoundService, SoundService>();
             builder.Services.AddTransient<ICamera2Service, Camera2Service>();
-            builder.Services.AddTransient<ICamera2FaceDetectorService, Camera2FaceDetectorService>(); 
 #endif
             builder.Services.AddTransient<MainPage>();
             builder.Services.AddTransient<MainPageModel>();
