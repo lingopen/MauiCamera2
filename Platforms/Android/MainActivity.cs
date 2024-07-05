@@ -26,6 +26,6 @@ namespace MauiCamera2
             {
                 Toast.MakeText(this, "初始化失败," + ex.Message, ToastLength.Long)?.Show();
             }
-        }
+        } 
     }
 }

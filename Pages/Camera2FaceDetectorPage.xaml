@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:control="clr-namespace:MauiCamera2.Controls"
     xmlns:pages="clr-namespace:MauiCamera2.Pages"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     x:Name="root"
     x:DataType="pages:Camera2FaceDetectorPageModel"
     x:TypeArguments="pages:Camera2FaceDetectorPageModel"

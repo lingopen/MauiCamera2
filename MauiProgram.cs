@@ -48,7 +48,7 @@ namespace MauiCamera2
             builder.Services.AddSingleton<ILogService, LogService>();
 #if ANDROID
             builder.Services.AddSingleton<IPlatformService, PlatformService>();
-            builder.Services.AddSingleton<ISoundService, SoundService>();
+            builder.Services.AddSingleton<ISoundService, SoundService>(); 
             builder.Services.AddTransient<ICamera2Service, Camera2Service>();
 #endif
             builder.Services.AddTransient<MainPage>();

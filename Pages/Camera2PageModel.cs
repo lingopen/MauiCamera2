@@ -7,11 +7,11 @@ namespace MauiCamera2.Pages
 {
     public partial class Camera2PageModel : BaseViewModel
     {
-        private readonly ICamera2Service _camera2Service;
-        public Camera2PageModel(ICamera2Service camera2Service) : base()
+        private readonly ICamera2Service _camera2Service; 
+        public Camera2PageModel(ICamera2Service camera2Service ) : base()
         {
             _camera2Service = camera2Service;
-            _camera2Service.CallBack += _camera2Service_CallBack;
+            _camera2Service.CallBack += _camera2Service_CallBack; 
         }
 
         private void _camera2Service_CallBack(object? sender, byte[]? dFile)
@@ -53,5 +53,6 @@ namespace MauiCamera2.Pages
         {
             _camera2Service.TakePicture();
         }
+   
     }
 }
