@@ -48,14 +48,15 @@
             <Grid
                 Grid.Row="1"
                 Margin="4"
-                RowDefinitions="auto, auto,auto">
+                RowDefinitions="*, auto,auto">
 
-                <control:TextureView x:Name="textureView" WidthRequest="360" HeightRequest="480"
+                <control:TextureView x:Name="textureView"
                                      VerticalOptions="FillAndExpand"   />
-                <!--2个视图重叠在一起的-->
-                <control:TextureView x:Name="faceView" Grid.Row="0" WidthRequest="360" HeightRequest="480"
+                <!--2个视图重叠在一起的 WidthRequest="360" HeightRequest="480"-->
+                <control:TextureView x:Name="faceView" Grid.Row="0"
                                      VerticalOptions="FillAndExpand"  />
                 <Grid Grid.Row="1" ColumnDefinitions="*,*,*">
+                    <Button  Grid.Column="0" Command="{Binding TakeFloatCommand}" FontFamily="IconFont"  Text="悬浮按钮" />
                     <Button  Grid.Column="1" Command="{Binding TakePictureCommand}" FontFamily="IconFont"  Text="&#xe664;" />
                     <Button Grid.Column="2" Command="{Binding ChangeCameraCommand}"  FontFamily="IconFont" Text="&#xe6f9;" />
                 </Grid>

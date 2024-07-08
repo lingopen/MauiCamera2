@@ -9,11 +9,13 @@ namespace MauiCamera2.Pages
     public partial class Camera2FaceDetectorPageModel : BaseViewModel
     {
         private readonly ICamera2Service _camera2Service;
+        private readonly IFloatService _floatService;
         private object? textureView;
-        public Camera2FaceDetectorPageModel(ICamera2Service camera2Service) : base()
+        public Camera2FaceDetectorPageModel(ICamera2Service camera2Service, IFloatService floatService) : base()
         {
             _camera2Service = camera2Service;
             _camera2Service.CallBack += _camera2Service_CallBack;
+            _floatService = floatService;
         }
 
         private void _camera2Service_CallBack(object? sender, byte[]? dFile)
@@ -61,6 +63,12 @@ namespace MauiCamera2.Pages
         void TakePicture()
         {
             _camera2Service.TakePicture();
+        }
+        [RelayCommand]
+        
+        void TakeFloat()
+        {
+            _floatService.Show();
         }
     }
 }

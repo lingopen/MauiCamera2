@@ -50,6 +50,7 @@ namespace MauiCamera2
             builder.Services.AddSingleton<IPlatformService, PlatformService>();
             builder.Services.AddSingleton<ISoundService, SoundService>(); 
             builder.Services.AddTransient<ICamera2Service, Camera2Service>();
+            builder.Services.AddTransient<IFloatService, FloatService>();
 #endif
             builder.Services.AddTransient<MainPage>();
             builder.Services.AddTransient<MainPageModel>();

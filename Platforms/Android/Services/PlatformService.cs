@@ -1,6 +1,7 @@
 ﻿using Android.Content;
 using Android.OS;
 using Android.Provider;
+using Android.Views;
 using MauiCamera2.Services;
 
 namespace MauiCamera2.Platforms.Droid.Services
@@ -57,8 +58,31 @@ namespace MauiCamera2.Platforms.Droid.Services
                 return;
             }
 
-
+#pragma warning disable CA1416 // 验证平台兼容性
             //权限确认
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.M)
+            {
+                if (!Settings.CanDrawOverlays(Platform.AppContext))
+                {
+
+                    //启动Activity让用户授权
+                    Intent intent = new Intent(Settings.ActionManageOverlayPermission);
+                    intent.SetData(Android.Net.Uri.Parse("package:" + Platform.CurrentActivity?.PackageName ?? ""));
+                    Platform.CurrentActivity?.StartActivityForResult(intent, 0);
+                    var ret = await Shell.Current.DisplayAlert("提示", "已授予浮窗权限?", "确认", "取消");
+                    if (!ret)
+                    {
+                        System.Environment.Exit(0);
+                    }
+                }
+                if (!Settings.CanDrawOverlays(Platform.AppContext))
+                {
+                    await Shell.Current.DisplayAlert("错误", "未取得浮窗权限，程序将自动退出!", "确认");
+                    System.Environment.Exit(0);
+                }
+            }
+#pragma warning restore CA1416 // 验证平台兼容性
+
             if (Build.VERSION.SdkInt >= BuildVersionCodes.M)
             {
                 status = await Permissions.CheckStatusAsync<ReadWriteStoragePerms>();
@@ -69,6 +93,9 @@ namespace MauiCamera2.Platforms.Droid.Services
                     await Shell.Current.DisplayAlert("错误", "未取得文件权限，程序将自动退出!", "确认");
                     System.Environment.Exit(0);
                 }
+
+                
+
             }
             if (Build.VERSION.SdkInt >= BuildVersionCodes.R)
             {
